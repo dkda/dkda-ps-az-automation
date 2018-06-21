@@ -15,8 +15,10 @@ Param(
 
     [Parameter(Mandatory=$true)]
     [ValidateSet("start", "stop")]
-    [String]$Action
+    [String]$Action,
 
+    [ValidateSet("true", "false")]
+    [String]$RunOnWeekends = "false"
 )
 
 # Virtual Machines with this tag key/value pair will be started
@@ -25,6 +27,15 @@ Param(
 
 $tagName = "test"
 $tagValue = "true"
+
+# If it's the weekend, exit
+if ($RunOnWeekends -eq "false"){
+    $day = (Get-Date).DayOfWeek
+    if ($day -eq 'Saturday' -or $day -eq 'Sunday'){
+        exit
+    }
+}
+
 
 try
 {
