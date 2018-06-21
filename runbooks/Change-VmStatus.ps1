@@ -49,8 +49,10 @@ catch {
     }
 }
 
-# Get all VMs with 'powerschedule=officehours' tag
-$VirtualMachines = Get-AzureRmResource -TagName $tagName -TagValue $tagValue -ResourceType Microsoft.Compute/virtualMachines
+# I would use this implementation but apparently the AzureRM module they are running is from the 1960's
+#$VirtualMachines = Get-AzureRmResource -TagName $tagName -TagValue $tagValue -ResourceType Microsoft.Compute/virtualMachines
+
+$VirtualMachines = Find-AzureRmResource -TagName $tagName -TagValue $tagValue | Where-Object {$_.ResourceType -eq "Microsoft.Compute/virtualMachines"}
 
 foreach($VirtualMachine in $VirtualMachines){
 
