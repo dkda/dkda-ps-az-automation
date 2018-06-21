@@ -21,12 +21,9 @@ Param(
     [String]$RunOnWeekends = "false"
 )
 
-# Virtual Machines with this tag key/value pair will be started
-# $tagName = "powerschedule"
-# $tagValue = "officehours"
-
-$tagName = "test"
-$tagValue = "true"
+# Virtual Machines with this tag key/value pair will be stopped / started
+$tagName = "powerschedule"
+$tagValue = "officehours"
 
 # If it's the weekend, exit
 if ($RunOnWeekends -eq "false"){
