@@ -26,7 +26,9 @@ $tagName = "powerschedule"
 $tagValue = "officehours"
 
 # If it's the weekend, exit
+
 if ($RunOnWeekends -eq "false"){
+    Set-Timezone -Name "Eastern Standard Time" # We need to know if it's the weekend in EST, not UTC
     $day = (Get-Date).DayOfWeek
     if ($day -eq 'Saturday' -or $day -eq 'Sunday'){
         exit
